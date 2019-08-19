@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { lighten } from 'polished';
 
 export const Container = styled.div`
-  max-width: 600px;
-  margin: 50px auto;
+  max-width: 1040px;
+  margin: 40px auto;
 
   form {
     display: flex;
@@ -15,6 +15,7 @@ export const Container = styled.div`
       border: 0;
       border-radius: 4px;
       height: 44px;
+      width: 100%;
       padding: 0 15px;
       color: #fff;
       margin: 0 0 10px;
@@ -24,7 +25,28 @@ export const Container = styled.div`
       }
     }
 
-    span {
+    .react-datepicker-wrapper,
+    .react-datepicker__input-container {
+      display: block;
+    }
+
+    textarea {
+      resize: vertical;
+      background: rgba(0, 0, 0, 0.1);
+      border: 0;
+      border-radius: 4px;
+      min-height: 100px;
+      max-height: 200px;
+      padding: 15px;
+      color: #fff;
+      margin: 0 0 10px;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+
+    > span {
       color: #fb6f91;
       align-self: flex-start;
       margin-bottom: 10px;
@@ -37,13 +59,15 @@ export const Container = styled.div`
       margin: 10px 0 20px;
     }
 
-    button {
+    button[type='submit'] {
       display: flex;
       align-items: center;
       justify-content: center;
+      align-self: flex-end;
 
       margin: 10px 0 0;
       height: 44px;
+      width: 170px;
       background: #f94d6a;
       font-weight: bold;
       color: #fff;
