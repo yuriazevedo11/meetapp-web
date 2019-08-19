@@ -9,10 +9,11 @@ import DatePicker from './DatePicker';
 import { Container } from './styles';
 
 const schema = Yup.object().shape({
-  email: Yup.string()
-    .email('Insira um e-mail válido')
-    .required('O e-mail é obrigatório'),
-  password: Yup.string().required('A senha é obrigatória'),
+  image_id: Yup.number().required('O imagem é obrigatória'),
+  title: Yup.string().required('A título é obrigatório'),
+  description: Yup.string().required('A descrição é obrigatória'),
+  date: Yup.date().required('A data é obrigatória'),
+  location: Yup.string().required('A localização é obrigatória'),
 });
 
 export default function NewEdit() {
@@ -23,7 +24,7 @@ export default function NewEdit() {
   return (
     <Container>
       <Form schema={schema} onSubmit={handleSubmit}>
-        <BannerInput name="banner" />
+        <BannerInput name="image_id" />
 
         <Input name="title" placeholder="Título do meetup" />
         <Input name="description" placeholder="Descrição completa" multiline />

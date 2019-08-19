@@ -10,31 +10,29 @@ export default function Dashboard() {
       <header>
         <h1>Meus meetups</h1>
         <Link to="/new">
-          <button type="button">
-            <MdAddCircleOutline color="#fff" size={20} />
-            Novo meetup
-          </button>
+          <MdAddCircleOutline color="#fff" size={20} />
+          Novo meetup
         </Link>
       </header>
 
       <Scrollbar>
         <ul>
           <li>
-            <Link to="/dashboard">
+            <Link to="/details/1">
               <strong>Meetup de React Native</strong>
               <span>24 de junho, às 20h</span>
               <MdChevronRight color="#fff" size={30} />
             </Link>
           </li>
           <li>
-            <Link to="/dashboard">
+            <Link to="/details/1">
               <strong>Meetup de React Native</strong>
               <span>24 de junho, às 20h</span>
               <MdChevronRight color="#fff" size={30} />
             </Link>
           </li>
           <li>
-            <Link to="/dashboard">
+            <Link to="/details/1">
               <strong>Meetup de React Native</strong>
               <span>24 de junho, às 20h</span>
               <MdChevronRight color="#fff" size={30} />
