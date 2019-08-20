@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { Form, Input } from '@rocketseat/unform';
 import PropTypes from 'prop-types';
@@ -8,12 +8,17 @@ import * as Yup from 'yup';
 import BannerInput from './BannerInput';
 import DatePicker from './DatePicker';
 
+import {
+  createMeetupRequest,
+  editMeetupRequest,
+} from '~/store/modules/meetups/actions';
+
 import history from '~/routes/history';
 
 import { Container } from './styles';
 
 const schema = Yup.object().shape({
-  image_id: Yup.number().required('A imagem é obrigatória'),
+  banner: Yup.number().required('A imagem é obrigatória'),
   title: Yup.string().required('A título é obrigatório'),
   description: Yup.string().required('A descrição é obrigatória'),
   date: Yup.date().required('A data é obrigatória'),
@@ -26,6 +31,8 @@ export default function NewEdit({ match }) {
     state.meetups.data.find(data => data.id === Number(id))
   );
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (match.path !== '/new' && !meetup) {
       history.push('/new');
@@ -33,17 +40,19 @@ export default function NewEdit({ match }) {
   }, [match.path, meetup]);
 
   function handleSubmit(data) {
+    const { banner: image_id } = data;
+
     if (match.path === '/new') {
-      console.tron.log('NEW MEETUP', data);
+      dispatch(createMeetupRequest({ image_id, ...data }));
     } else {
-      console.tron.log('EDIT MEETUP', data);
+      dispatch(editMeetupRequest({ id, image_id, ...data }));
     }
   }
 
   return (
     <Container>
       <Form initialData={meetup} schema={schema} onSubmit={handleSubmit}>
-        <BannerInput name="image_id" />
+        <BannerInput name="banner" />
 
         <Input name="title" placeholder="Título do meetup" />
         <Input

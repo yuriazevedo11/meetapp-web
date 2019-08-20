@@ -4,8 +4,13 @@ import { format, parseISO } from 'date-fns';
 import pt_BR from 'date-fns/locale/pt-BR';
 
 import api from '~/services/api';
+import history from '~/routes/history';
 
-import { loadMeetupsSuccess, loadMeetupsFailure } from './actions';
+import {
+  loadMeetupsSuccess,
+  createMeetupSuccess,
+  meetupsFailure,
+} from './actions';
 
 export function* loadMeetups() {
   try {
@@ -33,8 +38,49 @@ export function* loadMeetups() {
   } catch (err) {
     toast.error('Erro ao buscar meetups');
 
-    yield put(loadMeetupsFailure());
+    yield put(meetupsFailure());
   }
 }
 
-export default all([takeLatest('@meetups/LOAD_MEETUPS_REQUEST', loadMeetups)]);
+export function* createMeetup({ payload }) {
+  try {
+    const response = yield call(api.post, 'meetups', { ...payload.meetup });
+
+    yield put(createMeetupSuccess(response.data));
+
+    toast.success('Meetup criado com sucesso!');
+
+    history.push('dashboard');
+  } catch (err) {
+    toast.error('Erro ao criar meetup');
+
+    yield put(meetupsFailure());
+  }
+}
+
+export function* editMeetup({ payload }) {
+  try {
+    const { id } = payload.meetup;
+
+    const response = yield call(api.put, `meetups/${id}`, {
+      ...payload.meetup,
+      id,
+    });
+
+    yield put(createMeetupSuccess(response.data));
+
+    toast.success('Meetup alterado com sucesso!');
+
+    history.push('/dashboard');
+  } catch (err) {
+    toast.error('Erro ao alterado meetup');
+
+    yield put(meetupsFailure());
+  }
+}
+
+export default all([
+  takeLatest('@meetups/LOAD_MEETUPS_REQUEST', loadMeetups),
+  takeLatest('@meetups/CREATE_MEETUP_REQUEST', createMeetup),
+  takeLatest('@meetups/EDIT_MEETUP_REQUEST', editMeetup),
+]);

@@ -3,6 +3,7 @@ import produce from 'immer';
 const INITIAL_STATE = {
   data: [],
   loading: true,
+  btnLoading: false,
 };
 
 export default function meetups(state = INITIAL_STATE, action) {
@@ -13,7 +14,11 @@ export default function meetups(state = INITIAL_STATE, action) {
         draft.loading = false;
         break;
       }
-      case '@meetups/LOAD_MEETUPS_FAILURE': {
+      case '@meetups/CREATE_MEETUP_REQUEST' || '@meetups/EDIT_MEETUP_REQUEST': {
+        draft.btnLoading = true;
+        break;
+      }
+      case '@meetups/MEETUPS_FAILURE': {
         draft.loading = false;
         break;
       }
