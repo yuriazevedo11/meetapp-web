@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { lighten } from 'polished';
 
+import colors from '~/styles/colors';
+
 export const Wrapper = styled.div`
   height: 100%;
   background: linear-gradient(180deg, #25212e, #402845);
@@ -43,7 +45,7 @@ export const Content = styled.div`
     button {
       margin: 5px 0 0;
       height: 44px;
-      background: #f94d6a;
+      background: ${colors.primaryBtn};
       font-weight: bold;
       color: #fff;
       border: 0;
@@ -52,7 +54,7 @@ export const Content = styled.div`
       transition: background 0.3s;
 
       &:hover {
-        background: ${lighten(0.03, '#f94d6a')};
+        background: ${lighten(0.03, colors.primaryBtn)};
       }
     }
   }

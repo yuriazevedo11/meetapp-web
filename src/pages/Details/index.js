@@ -49,7 +49,13 @@ export default function Details({ match }) {
         </time>
         <address>
           <MdLocationOn color="#999" size={20} />
-          Rua Guilherme Gembala, 260
+          <a
+            href={`https://www.google.com/maps/search/${'Rua Guilherme Gembala, 260'}`}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Rua Guilherme Gembala, 260
+          </a>
         </address>
       </Content>
     </Container>

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { lighten, darken } from 'polished';
 
+import colors from '~/styles/colors';
+
 export const Container = styled.div`
   max-width: 1040px;
   margin: 40px auto;
@@ -37,19 +39,19 @@ export const Container = styled.div`
     }
 
     a {
-      background: #4dbaf9;
+      background: ${colors.secondaryBtn};
 
       &:hover {
-        background: ${darken(0.07, '#4dbaf9')};
+        background: ${darken(0.07, colors.secondaryBtn)};
       }
     }
 
     button {
       margin-left: 15px;
-      background: #f94d6a;
+      background: ${colors.primaryBtn};
 
       &:hover {
-        background: ${lighten(0.03, '#f94d6a')};
+        background: ${lighten(0.03, colors.primaryBtn)};
       }
     }
   }
@@ -92,5 +94,9 @@ export const Content = styled.div`
   address {
     margin-left: 30px;
     font-style: normal;
+  }
+
+  address a {
+    color: #999;
   }
 `;

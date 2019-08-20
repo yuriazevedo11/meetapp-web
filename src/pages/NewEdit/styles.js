@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { lighten } from 'polished';
 
+import colors from '~/styles/colors';
+
 export const Container = styled.div`
   max-width: 1040px;
   margin: 40px auto;
@@ -68,7 +70,7 @@ export const Container = styled.div`
       margin: 10px 0 0;
       height: 44px;
       width: 170px;
-      background: #f94d6a;
+      background: ${colors.primaryBtn};
       font-weight: bold;
       color: #fff;
       border: 0;
@@ -81,7 +83,7 @@ export const Container = styled.div`
       }
 
       &:hover {
-        background: ${lighten(0.03, '#f94d6a')};
+        background: ${lighten(0.03, colors.primaryBtn)};
       }
     }
   }

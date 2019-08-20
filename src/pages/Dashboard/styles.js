@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import PerfectSrollbar from 'react-perfect-scrollbar';
 import { lighten } from 'polished';
 
+import colors from '~/styles/colors';
+
 export const Container = styled.div`
   max-width: 1040px;
   margin: 40px auto;
@@ -23,7 +25,7 @@ export const Container = styled.div`
 
       padding: 0 15px;
       height: 44px;
-      background: #f94d6a;
+      background: ${colors.primaryBtn};
       font-weight: bold;
       color: #fff;
       border: 0;
@@ -36,7 +38,7 @@ export const Container = styled.div`
       }
 
       &:hover {
-        background: ${lighten(0.03, '#f94d6a')};
+        background: ${lighten(0.03, colors.primaryBtn)};
       }
     }
   }
