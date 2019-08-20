@@ -1,26 +1,27 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MdCameraAlt } from 'react-icons/md';
 import { useField } from '@rocketseat/unform';
+import PropTypes from 'prop-types';
 
 import api from '~/services/api';
 
 import { Container } from './styles';
 
-export default function BannerInput() {
-  const { defaultValue, registerField } = useField('banner');
+export default function BannerInput({ name }) {
+  const { fieldName, defaultValue, registerField, error } = useField(name);
 
   const [file, setFile] = useState(defaultValue && defaultValue.id);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
 
-  const ref = useRef();
+  const ref = useRef(null);
 
   useEffect(() => {
     registerField({
-      name: 'image_id',
+      name: fieldName,
       ref: ref.current,
       path: 'dataset.file',
     });
-  }, [ref.current]); // eslint-disable-line
+  }, [ref.current, fieldName]); // eslint-disable-line
 
   async function handleChange(e) {
     const data = new FormData();
@@ -55,6 +56,11 @@ export default function BannerInput() {
           ref={ref}
         />
       </label>
+      {error && <span>{error}</span>}
     </Container>
   );
 }
+
+BannerInput.propTypes = {
+  name: PropTypes.string.isRequired,
+};

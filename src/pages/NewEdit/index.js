@@ -13,7 +13,7 @@ import history from '~/routes/history';
 import { Container } from './styles';
 
 const schema = Yup.object().shape({
-  image_id: Yup.number().required('O imagem é obrigatória'),
+  image_id: Yup.number().required('A imagem é obrigatória'),
   title: Yup.string().required('A título é obrigatório'),
   description: Yup.string().required('A descrição é obrigatória'),
   date: Yup.date().required('A data é obrigatória'),

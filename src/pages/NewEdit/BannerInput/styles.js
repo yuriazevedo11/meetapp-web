@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background: rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
-  height: 250px;
-  border-radius: 4px;
+  margin-bottom: 10px;
 
   label {
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background: rgba(0, 0, 0, 0.2);
     width: 100%;
-    height: 100%;
+    height: 250px;
     text-align: center;
     cursor: pointer;
     opacity: 1;
@@ -38,5 +38,10 @@ export const Container = styled.div`
     input {
       display: none;
     }
+  }
+
+  > span {
+    color: #fb6f91;
+    margin: 0 0 10px 10px;
   }
 `;

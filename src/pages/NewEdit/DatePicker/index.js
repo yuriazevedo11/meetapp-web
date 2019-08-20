@@ -3,11 +3,13 @@ import { useField } from '@rocketseat/unform';
 import PropTypes from 'prop-types';
 import ReactDatePicker, { registerLocale } from 'react-datepicker';
 import ptBR from 'date-fns/locale/pt-BR';
+import { setHours, setMinutes, getHours, getMinutes } from 'date-fns';
 
 registerLocale('pt-BR', ptBR);
 
 export default function DatePicker({ name, placeholder }) {
   const { fieldName, registerField, defaultValue, error } = useField(name);
+
   const [selected, setSelected] = useState(defaultValue);
 
   const ref = useRef(null);
@@ -30,6 +32,11 @@ export default function DatePicker({ name, placeholder }) {
         selected={selected}
         onChange={date => setSelected(date)}
         minDate={new Date()}
+        minTime={setHours(
+          setMinutes(new Date(), getMinutes(new Date())),
+          getHours(new Date())
+        )}
+        maxTime={setHours(setMinutes(new Date(), 30), 23)}
         showTimeSelect
         timeFormat="HH:mm"
         dateFormat="dd/MM/yyyy - HH:mm"
