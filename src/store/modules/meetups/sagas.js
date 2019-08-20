@@ -12,20 +12,18 @@ export function* loadMeetups() {
     const response = yield call(api.get, 'organizing');
 
     const formattedResponse = response.data.map(meetup => {
-      const { File, ...rest } = meetup;
+      const { File: banner, ...rest } = meetup;
 
-      const formattedDate = format(
-        parseISO(meetup.date),
-        "d 'de' MMMM', às' HH'h'",
-        {
-          locale: pt_BR,
-        }
-      );
+      rest.date = parseISO(rest.date);
+
+      const formattedDate = format(rest.date, "d 'de' MMMM', às' HH'h'", {
+        locale: pt_BR,
+      });
 
       const formattedMeetup = {
         ...rest,
         formattedDate,
-        banner: File.url,
+        banner,
       };
 
       return formattedMeetup;

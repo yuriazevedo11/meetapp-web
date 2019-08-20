@@ -55,7 +55,7 @@ export default function Details({ match }) {
 
       <Content>
         <div>
-          <img src={meetup.banner} alt="Banner" />
+          <img src={meetup.banner.url} alt="Banner" />
         </div>
 
         <strong>{meetup.description}</strong>

@@ -11,7 +11,7 @@ export const Container = styled.div`
     height: 100%;
     text-align: center;
     cursor: pointer;
-    opacity: 0.7;
+    opacity: 1;
 
     display: flex;
     justify-content: center;
@@ -19,20 +19,21 @@ export const Container = styled.div`
     flex-direction: column;
 
     &:hover {
-      opacity: 1;
+      opacity: 0.8;
     }
 
     span {
       font-size: 20px;
       margin-top: 5px;
-      color: #fff;
+      color: #eee;
     }
 
-    /* TODO: Preview */
-    /* img {
-      height: 100%;
-      width: 100%;
-    } */
+    img {
+      border-radius: 4px;
+      align-self: flex-start;
+      max-width: 1040px;
+      max-height: 250px;
+    }
 
     input {
       display: none;

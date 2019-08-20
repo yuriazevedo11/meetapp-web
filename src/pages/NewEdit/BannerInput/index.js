@@ -14,16 +14,13 @@ export default function BannerInput() {
 
   const ref = useRef();
 
-  // TODO: registerField
   useEffect(() => {
-    if (ref.current) {
-      registerField({
-        name: 'image_id',
-        ref: ref.current,
-        path: 'dataset.file',
-      });
-    }
-  }, [ref]); // eslint-disable-line
+    registerField({
+      name: 'image_id',
+      ref: ref.current,
+      path: 'dataset.file',
+    });
+  }, [ref.current]); // eslint-disable-line
 
   async function handleChange(e) {
     const data = new FormData();
@@ -44,7 +41,7 @@ export default function BannerInput() {
           <img src={preview} alt="Banner" />
         ) : (
           <>
-            <MdCameraAlt color="#fff" size={48} />
+            <MdCameraAlt color="#eee" size={48} />
             <span>Selecionar imagem</span>
           </>
         )}

@@ -28,17 +28,19 @@ export default function Dashboard() {
     }
 
     if (meetups && meetups.length > 0) {
-      return meetups.map(meetup => (
+      return (
         <ul>
-          <li key={meetup.id}>
-            <Link to={`/details/${meetup.id}`}>
-              <strong>{meetup.title}</strong>
-              <span>{meetup.formattedDate}</span>
-              <MdChevronRight color="#fff" size={30} />
-            </Link>
-          </li>
+          {meetups.map(meetup => (
+            <li key={meetup.id}>
+              <Link to={`/details/${meetup.id}`}>
+                <strong>{meetup.title}</strong>
+                <span>{meetup.formattedDate}</span>
+                <MdChevronRight color="#fff" size={30} />
+              </Link>
+            </li>
+          ))}
         </ul>
-      ));
+      );
     }
 
     return <h2>Você não está organizando nenhum meetup no momento {':('}</h2>;

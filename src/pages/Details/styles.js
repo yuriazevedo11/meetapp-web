@@ -63,13 +63,13 @@ export const Content = styled.div`
 
   div {
     background: rgba(0, 0, 0, 0.1);
-    height: 300px;
+    height: 250px;
   }
 
   img {
     border-radius: 4px;
-    max-width: 1000px;
-    max-height: 300px;
+    max-width: 1040px;
+    max-height: 250px;
   }
 
   strong {

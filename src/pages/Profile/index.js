@@ -2,10 +2,18 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 import { MdAddCircleOutline } from 'react-icons/md';
+import * as Yup from 'yup';
 
 import { updateProfileRequest } from '~/store/modules/user/actions';
 
 import { Container } from './styles';
+
+const schema = Yup.object().shape({
+  name: Yup.string().required('O nome é obrigatório'),
+  email: Yup.string()
+    .email('Insira um e-mail válido')
+    .required('O e-mail é obrigatório'),
+});
 
 export default function Profile() {
   const user = useSelector(state => state.user.profile);
@@ -17,7 +25,7 @@ export default function Profile() {
 
   return (
     <Container>
-      <Form initialData={user} onSubmit={handleSubmit}>
+      <Form initialData={user} schema={schema} onSubmit={handleSubmit}>
         <Input name="name" placeholder="Nome completo" />
         <Input name="email" type="email" placeholder="Seu endereço de e-mail" />
 
