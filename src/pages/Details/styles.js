@@ -75,9 +75,10 @@ export const Content = styled.div`
   strong {
     color: #fff;
     margin: 25px 0;
-    line-height: 30px;
+    line-height: 24px;
     display: block;
     font-weight: 400;
+    white-space: pre-line;
   }
 
   time,

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   MdEdit,
@@ -6,21 +7,42 @@ import {
   MdLocationOn,
   MdDateRange,
 } from 'react-icons/md';
+import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
+
+import api from '~/services/api';
+
+import history from '~/routes/history';
 
 import { Container, Content } from './styles';
 
 export default function Details({ match }) {
   const { id } = match.params;
+  const meetup = useSelector(state =>
+    state.meetups.data.find(data => data.id === Number(id))
+  );
 
-  function handleCancel() {
-    console.tron.log('CANCEL');
+  if (!meetup) {
+    history.push('/dashboard');
+    return null;
+  }
+
+  async function handleCancel() {
+    try {
+      await api.delete(`meetups/${id}`);
+
+      toast.success('Meetup cancelado com sucesso!');
+
+      history.push('/dashboard');
+    } catch (err) {
+      toast.error('Erro ao cancelar meetup');
+    }
   }
 
   return (
     <Container>
       <header>
-        <h1>Meetup de React Native</h1>
+        <h1>{meetup.title}</h1>
         <Link to={`/edit/${id}`}>
           <MdEdit color="#fff" size={20} />
           Editar
@@ -33,28 +55,22 @@ export default function Details({ match }) {
 
       <Content>
         <div>
-          <img src="https://wallpapercave.com/wp/wp2555066.jpg" alt="Banner" />
+          <img src={meetup.banner} alt="Banner" />
         </div>
 
-        <strong>
-          O Meetup de React Native é um evento que reúne a comunidade de
-          desenvolvimento mobile utilizando React a fim de compartilhar
-          conhecimento. Todos são convidados. Caso queira participar como
-          palestrante do meetup envie um e-mail para
-          organizacao@meetuprn.com.br.
-        </strong>
+        <strong>{meetup.description}</strong>
         <time>
           <MdDateRange color="#999" size={20} />
-          24 de Junho, às 20h
+          {meetup.formattedDate}
         </time>
         <address>
           <MdLocationOn color="#999" size={20} />
           <a
-            href={`https://www.google.com/maps/search/${'Rua Guilherme Gembala, 260'}`}
+            href={`https://www.google.com/maps/search/${meetup.location}`}
             rel="noopener noreferrer"
             target="_blank"
           >
-            Rua Guilherme Gembala, 260
+            {meetup.location}
           </a>
         </address>
       </Content>

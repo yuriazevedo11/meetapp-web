@@ -3,6 +3,7 @@ import PerfectSrollbar from 'react-perfect-scrollbar';
 import { lighten } from 'polished';
 
 import colors from '~/styles/colors';
+import { rotate } from '~/styles/animations';
 
 export const Container = styled.div`
   max-width: 1040px;
@@ -47,6 +48,18 @@ export const Container = styled.div`
 export const Scrollbar = styled(PerfectSrollbar)`
   max-height: calc(80vh - 40px);
   margin-top: 20px;
+
+  div {
+    text-align: center;
+
+    svg {
+      animation: ${rotate} 1s linear infinite;
+    }
+  }
+
+  h2 {
+    color: #999;
+  }
 
   ul {
     list-style: none;

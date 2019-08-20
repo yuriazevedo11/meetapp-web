@@ -1,10 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { MdAddCircleOutline, MdChevronRight } from 'react-icons/md';
+import { FaSpinner } from 'react-icons/fa';
+
+import { loadMeetupsRequest } from '~/store/modules/meetups/actions';
 
 import { Container, Scrollbar } from './styles';
 
 export default function Dashboard() {
+  const loading = useSelector(state => state.meetups.loading);
+  const meetups = useSelector(state => state.meetups.data);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadMeetupsRequest());
+  }, [dispatch]);
+
+  function MeetupList() {
+    if (loading) {
+      return (
+        <div>
+          <FaSpinner color="#fff" size={32} />
+        </div>
+      );
+    }
+
+    if (meetups && meetups.length > 0) {
+      return meetups.map(meetup => (
+        <ul>
+          <li key={meetup.id}>
+            <Link to={`/details/${meetup.id}`}>
+              <strong>{meetup.title}</strong>
+              <span>{meetup.formattedDate}</span>
+              <MdChevronRight color="#fff" size={30} />
+            </Link>
+          </li>
+        </ul>
+      ));
+    }
+
+    return <h2>Você não está organizando nenhum meetup no momento {':('}</h2>;
+  }
+
   return (
     <Container>
       <header>
@@ -16,29 +55,7 @@ export default function Dashboard() {
       </header>
 
       <Scrollbar>
-        <ul>
-          <li>
-            <Link to="/details/1">
-              <strong>Meetup de React Native</strong>
-              <span>24 de junho, às 20h</span>
-              <MdChevronRight color="#fff" size={30} />
-            </Link>
-          </li>
-          <li>
-            <Link to="/details/1">
-              <strong>Meetup de React Native</strong>
-              <span>24 de junho, às 20h</span>
-              <MdChevronRight color="#fff" size={30} />
-            </Link>
-          </li>
-          <li>
-            <Link to="/details/1">
-              <strong>Meetup de React Native</strong>
-              <span>24 de junho, às 20h</span>
-              <MdChevronRight color="#fff" size={30} />
-            </Link>
-          </li>
-        </ul>
+        <MeetupList />
       </Scrollbar>
     </Container>
   );
