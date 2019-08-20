@@ -1,18 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useField } from '@rocketseat/unform';
 import PropTypes from 'prop-types';
-
 import ReactDatePicker, { registerLocale } from 'react-datepicker';
-import enGB from 'date-fns/locale/pt-BR';
+import ptBR from 'date-fns/locale/pt-BR';
 
-registerLocale('pt-BR', enGB);
+registerLocale('pt-BR', ptBR);
 
 export default function DatePicker({ name, placeholder }) {
-  const [selected, setSelected] = useState(null);
+  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const [selected, setSelected] = useState(defaultValue);
+
+  const ref = useRef(null);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: ref.current,
+      path: 'props.selected',
+      clearValue: pickerRef => {
+        pickerRef.clear();
+      },
+    });
+  }, [ref.current, fieldName]); // eslint-disable-line
 
   return (
     <>
       <ReactDatePicker
-        name={name}
+        name={fieldName}
         selected={selected}
         onChange={date => setSelected(date)}
         minDate={new Date()}
@@ -21,7 +35,9 @@ export default function DatePicker({ name, placeholder }) {
         dateFormat="dd/MM/yyyy - HH:mm"
         placeholderText={placeholder}
         locale="pt-BR"
+        ref={ref}
       />
+      {error && <span>{error}</span>}
     </>
   );
 }
