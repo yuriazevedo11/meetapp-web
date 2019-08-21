@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import {
   MdEdit,
   MdDeleteForever,
@@ -14,7 +13,7 @@ import api from '~/services/api';
 
 import history from '~/routes/history';
 
-import { Container, Content } from './styles';
+import { Container, Content, Scrollbar } from './styles';
 
 export default function Details({ match }) {
   const { id } = match.params;
@@ -43,26 +42,40 @@ export default function Details({ match }) {
     <Container>
       <header>
         <h1>{meetup.title}</h1>
-        <Link to={`/edit/${id}`}>
+        <button
+          type="button"
+          className="edit"
+          onClick={() => history.push(`/edit/${id}`)}
+          disabled={meetup.past}
+        >
           <MdEdit color="#fff" size={20} />
           Editar
-        </Link>
-        <button type="button" onClick={handleCancel}>
+        </button>
+        <button
+          type="button"
+          className="cancel"
+          onClick={handleCancel}
+          disabled={meetup.past}
+        >
           <MdDeleteForever color="#fff" size={20} />
           Cancelar
         </button>
       </header>
 
       <Content>
-        <div>
+        <div className="banner">
           <img src={meetup.banner.url} alt="Banner" />
         </div>
 
-        <strong>{meetup.description}</strong>
+        <Scrollbar>
+          <strong>{meetup.description}</strong>
+        </Scrollbar>
+
         <time>
           <MdDateRange color="#999" size={20} />
           {meetup.formattedDate}
         </time>
+
         <address>
           <MdLocationOn color="#999" size={20} />
           <a

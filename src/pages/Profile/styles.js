@@ -4,7 +4,8 @@ import { lighten } from 'polished';
 import colors from '~/styles/colors';
 
 export const Container = styled.div`
-  max-width: 600px;
+  max-width: 660px;
+  padding: 0 20px;
   margin: 50px auto;
 
   form {

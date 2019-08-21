@@ -19,7 +19,7 @@ export const Container = styled.div`
     flex-direction: column;
 
     &:hover {
-      opacity: 0.8;
+      opacity: 0.9;
     }
 
     span {

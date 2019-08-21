@@ -54,6 +54,7 @@ export const Profile = styled.div`
     height: 35px;
     color: #fff;
     background: #d44059;
+    transition: background 0.3s;
 
     &:hover {
       background: ${lighten(0.03, '#d44059')};

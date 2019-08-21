@@ -6,7 +6,8 @@ import colors from '~/styles/colors';
 import { rotate } from '~/styles/animations';
 
 export const Container = styled.div`
-  max-width: 1040px;
+  max-width: 1100px;
+  padding: 0 30px;
   margin: 40px auto;
 
   header {
@@ -64,7 +65,12 @@ export const Scrollbar = styled(PerfectSrollbar)`
   ul {
     list-style: none;
 
+    li[past='true'] {
+      opacity: 0.5;
+    }
+
     li a {
+      transition: padding 0.3s;
       padding: 15px 25px;
       background: rgba(0, 0, 0, 0.1);
       border-radius: 4px;
@@ -83,6 +89,10 @@ export const Scrollbar = styled(PerfectSrollbar)`
         color: #999;
         margin-right: 25px;
       }
+    }
+
+    li:hover a {
+      padding: 15px 20px;
     }
 
     li + li {

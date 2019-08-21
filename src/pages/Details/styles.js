@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { lighten, darken } from 'polished';
+import PerfectSrollbar from 'react-perfect-scrollbar';
 
 import colors from '~/styles/colors';
 
 export const Container = styled.div`
-  max-width: 1040px;
+  max-width: 1100px;
+  padding: 0 30px;
   margin: 40px auto;
 
   header {
@@ -18,8 +20,8 @@ export const Container = styled.div`
       margin-right: auto;
     }
 
-    a,
-    button {
+    button.edit,
+    button.cancel {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -38,7 +40,7 @@ export const Container = styled.div`
       }
     }
 
-    a {
+    button.edit {
       background: ${colors.secondaryBtn};
 
       &:hover {
@@ -46,13 +48,18 @@ export const Container = styled.div`
       }
     }
 
-    button {
+    button.cancel {
       margin-left: 15px;
       background: ${colors.primaryBtn};
 
       &:hover {
         background: ${lighten(0.03, colors.primaryBtn)};
       }
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
   }
 `;
@@ -61,7 +68,7 @@ export const Content = styled.div`
   margin-top: 30px;
   font-size: 16px;
 
-  div {
+  div.banner {
     background: rgba(0, 0, 0, 0.1);
     height: 250px;
   }
@@ -74,7 +81,6 @@ export const Content = styled.div`
 
   strong {
     color: #fff;
-    margin: 25px 0;
     line-height: 24px;
     display: block;
     font-weight: 400;
@@ -100,4 +106,15 @@ export const Content = styled.div`
   address a {
     color: #999;
   }
+`;
+
+export const Scrollbar = styled(PerfectSrollbar)`
+  /* SCROLLBAR ALWAYS VISIBLE */
+  .ps__rail-x,
+  .ps__rail-y {
+    opacity: 0.6;
+  }
+
+  max-height: 125px;
+  margin: 25px 0;
 `;
