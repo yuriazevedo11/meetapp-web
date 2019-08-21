@@ -3,7 +3,7 @@ import { useField } from '@rocketseat/unform';
 import PropTypes from 'prop-types';
 import ReactDatePicker, { registerLocale } from 'react-datepicker';
 import ptBR from 'date-fns/locale/pt-BR';
-import { setHours, setMinutes, getHours, getMinutes } from 'date-fns';
+import { setHours, setMinutes, getHours, getMinutes, getDate } from 'date-fns';
 
 registerLocale('pt-BR', ptBR);
 
@@ -25,6 +25,20 @@ export default function DatePicker({ name, placeholder }) {
     });
   }, [ref.current, fieldName]); // eslint-disable-line
 
+  function calcMinTime() {
+    const today = getDate(new Date());
+    const selectedDay = getDate(selected);
+
+    if (!selected || today === selectedDay) {
+      return setHours(
+        setMinutes(new Date(), getMinutes(new Date())),
+        getHours(new Date())
+      );
+    }
+
+    return setHours(setMinutes(new Date(), 0), 0);
+  }
+
   return (
     <>
       <ReactDatePicker
@@ -32,10 +46,7 @@ export default function DatePicker({ name, placeholder }) {
         selected={selected}
         onChange={date => setSelected(date)}
         minDate={new Date()}
-        minTime={setHours(
-          setMinutes(new Date(), getMinutes(new Date())),
-          getHours(new Date())
-        )}
+        minTime={calcMinTime()}
         maxTime={setHours(setMinutes(new Date(), 30), 23)}
         showTimeSelect
         timeFormat="HH:mm"
