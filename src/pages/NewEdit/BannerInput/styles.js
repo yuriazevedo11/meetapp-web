@@ -8,7 +8,7 @@ export const Container = styled.div`
     margin-bottom: 10px;
     background: rgba(0, 0, 0, 0.2);
     width: 100%;
-    height: 250px;
+    height: 300px;
     text-align: center;
     cursor: pointer;
     opacity: 1;
@@ -32,7 +32,7 @@ export const Container = styled.div`
       border-radius: 4px;
       align-self: flex-start;
       max-width: 1040px;
-      max-height: 250px;
+      max-height: 300px;
     }
 
     input {

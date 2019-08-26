@@ -8,7 +8,8 @@ import api from '~/services/api';
 import { Container } from './styles';
 
 export default function BannerInput({ name }) {
-  const { fieldName, defaultValue, registerField, error } = useField(name);
+  const { defaultValue } = useField('banner');
+  const { fieldName, registerField, error } = useField(name);
 
   const [file, setFile] = useState(defaultValue && defaultValue.id);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);

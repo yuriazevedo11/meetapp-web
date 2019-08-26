@@ -52,7 +52,7 @@ export default function Dashboard() {
         <h1>Meus meetups</h1>
         <Link to="/new">
           <MdAddCircleOutline color="#fff" size={20} />
-          Novo meetup
+          <span>Novo meetup</span>
         </Link>
       </header>
 

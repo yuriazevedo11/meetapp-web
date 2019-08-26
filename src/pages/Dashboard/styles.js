@@ -35,8 +35,8 @@ export const Container = styled.div`
       font-size: 16px;
       transition: background 0.3s;
 
-      svg {
-        margin-right: 5px;
+      span {
+        margin-left: 5px;
       }
 
       &:hover {
@@ -66,7 +66,7 @@ export const Scrollbar = styled(PerfectSrollbar)`
     list-style: none;
 
     li[past='true'] {
-      opacity: 0.5;
+      opacity: 0.6;
     }
 
     li a {
@@ -93,6 +93,10 @@ export const Scrollbar = styled(PerfectSrollbar)`
 
     li:hover a {
       padding: 15px 20px;
+    }
+
+    li[past='false']:hover a {
+      background: rgba(0, 0, 0, 0.2);
     }
 
     li + li {

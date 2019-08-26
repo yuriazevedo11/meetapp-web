@@ -70,13 +70,13 @@ export const Content = styled.div`
 
   div.banner {
     background: rgba(0, 0, 0, 0.1);
-    height: 250px;
+    height: 300px;
   }
 
   img {
     border-radius: 4px;
     max-width: 1040px;
-    max-height: 250px;
+    max-height: 300px;
   }
 
   strong {

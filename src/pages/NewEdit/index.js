@@ -18,8 +18,8 @@ import history from '~/routes/history';
 import { Container } from './styles';
 
 const schema = Yup.object().shape({
-  banner: Yup.number().required('A imagem é obrigatória'),
-  title: Yup.string().required('A título é obrigatório'),
+  image_id: Yup.number().required('A imagem é obrigatória'),
+  title: Yup.string().required('O título é obrigatório'),
   description: Yup.string().required('A descrição é obrigatória'),
   date: Yup.date().required('A data é obrigatória'),
   location: Yup.string().required('A localização é obrigatória'),
@@ -40,19 +40,17 @@ export default function NewEdit({ match }) {
   }, [match.path, meetup]);
 
   function handleSubmit(data) {
-    const { banner: image_id } = data;
-
     if (match.path === '/new') {
-      dispatch(createMeetupRequest({ image_id, ...data }));
+      dispatch(createMeetupRequest({ ...data }));
     } else {
-      dispatch(editMeetupRequest({ id, image_id, ...data }));
+      dispatch(editMeetupRequest({ id, ...data }));
     }
   }
 
   return (
     <Container>
       <Form initialData={meetup} schema={schema} onSubmit={handleSubmit}>
-        <BannerInput name="banner" />
+        <BannerInput name="image_id" />
 
         <Input name="title" placeholder="Título do meetup" />
         <Input
